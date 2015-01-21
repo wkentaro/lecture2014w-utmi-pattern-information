@@ -17,17 +17,21 @@ def get_kadai4_data():
     return omega1, omega2, omega3
 
 
+def get_test_points():
+    test_points = np.array(
+        [[1, 2, 1],
+         [5, 3, 2],
+         [0, 0, 0],
+         [1, 0, 0]])
+    return test_points
+
 def compute_mahalanobis():
     omega1, omega2, omega3 = get_kadai4_data()
     mu1 = omega1.mean(axis=0)
     mu2 = omega2.mean(axis=0)
     mu3 = omega3.mean(axis=0)
 
-    test_points = np.array(
-        [[1, 2, 1],
-         [5, 3, 2],
-         [0, 0, 0],
-         [1, 0, 0]])
+    test_points = get_test_points()
 
     # compute mahalanobis distance between
     # test_points & mu of the set
