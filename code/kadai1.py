@@ -2,9 +2,11 @@
 # -*- coding: utf-8 -*-
 #
 from __future__ import division, print_function
+import datetime
 
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score
 
 
 def load_data(filename):
@@ -49,6 +51,10 @@ class LMS(object):
             y_pred[i] = np.argmin([(0-yp)**2, (1-yp)**2])
         return y_pred
 
+    def score(self, X_test, y_test):
+        y_pred = self.predict(X_test)
+        return accuracy_score(y_test, y_pred)
+
 
 def main():
     # get train dataset
@@ -83,11 +89,18 @@ def main():
     x = np.arange(-3, 5)
     y = 1 / lms.w[1] * (0.5 - lms.w[0]*x - lms.w[2])
     plt.plot(x, y, 'r', label='Classification surface')
-
+    # setup the figure
     plt.legend(loc=2)
     plt.ylim(None, 9)
     # plt.show()
-    plt.savefig('../output/kadai1.png')
+    now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+    plt.savefig('../output/kadai1_plot_{}.png'.format(now))
+
+    # save score
+    score = lms.score(X_test, y_test)
+    now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+    with open('../output/kadai1_score_{}.txt'.format(now), 'w') as f:
+        f.write('score: {}'.format(score))
 
 
 if __name__ == '__main__':
