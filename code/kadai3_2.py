@@ -5,8 +5,7 @@ from __future__ import division, print_function
 import datetime
 
 from kadai1 import get_kadai1_dataset
-import kadai3_1
-from kadai3_1 import KNearestNeighbor
+from kadai3_1 import KNearestNeighbor, analyze_kvalue
 
 
 def main():
@@ -14,7 +13,7 @@ def main():
     X_train, X_test, y_train, y_test = get_kadai1_dataset()
     # variate k from 1 to 10
     scores = []
-    best_k = kadai3_1.main()
+    best_k = analyze_kvalue(do_plot=False)
     knn = KNearestNeighbor(k=best_k)
     knn.fit(X_train, y_train)
     score = knn.score(X_test, y_test)

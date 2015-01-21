@@ -56,7 +56,7 @@ class KNearestNeighbor(object):
         return score
 
 
-def main():
+def analyze_kvalue(do_plot=True):
     # get kadai data
     X_train, _, y_train, _ = get_kadai1_dataset()
     # variate k from 1 to 10
@@ -65,18 +65,20 @@ def main():
         knn = KNearestNeighbor(k=k)
         score = knn.train_self_score(X_train, y_train)
         scores.append(score)
-    # plot the result
-    x = np.arange(1, 11)
-    scores = np.array(scores)
-    plt.title('k Nearest Neighbor, Relationship between k value and precision')
-    plt.xlabel('k value')
-    plt.ylabel('precision')
-    plt.plot(x, scores)
-    now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-    plt.savefig('../output/kadai3_various_kvalue_{}.png'.format(now))
+
+    if do_plot is True:
+        # plot the result
+        x = np.arange(1, 11)
+        scores = np.array(scores)
+        plt.title('k Nearest Neighbor, Relationship between k value and precision')
+        plt.xlabel('k value')
+        plt.ylabel('precision')
+        plt.plot(x, scores)
+        now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+        plt.savefig('../output/kadai3_various_kvalue_{}.png'.format(now))
 
     return np.argmax(scores) + 1  # k value of best precision
 
 
 if __name__ == '__main__':
-    main()
+    analyze_kvalue()
