@@ -1,0 +1,2 @@
+score_lms: 0.875
+score_with_pinv: 0.875

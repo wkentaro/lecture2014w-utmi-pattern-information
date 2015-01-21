@@ -13,8 +13,30 @@ def load_data(filename):
     with open(filename, 'rb') as f:
         data = []
         for row in f.readlines():
-            data.append(map(float, row.split()))
-    return np.array(data)
+            data.append(row.split())
+    return np.array(data, dtype=float)
+
+
+def get_kadai1_dataset():
+    # get train dataset
+    X1_train = load_data('../data/Train1.txt')
+    y1 = np.empty(X1_train.shape[0]).astype(int)
+    y1.fill(0)
+    X2_train = load_data('../data/Train2.txt')
+    y2 = np.empty(X2_train.shape[0]).astype(int)
+    y2.fill(1)
+    X_train = np.vstack((X1_train, X2_train))
+    y_train = np.hstack((y1, y2))
+    # get test dataset
+    X1_test = load_data('../data/Test1.txt')
+    y1_test = np.empty(X1_test.shape[0]).astype(int)
+    y1_test.fill(0)
+    X2_test = load_data('../data/Test2.txt')
+    y2_test = np.empty(X2_test.shape[0]).astype(int)
+    y2_test.fill(1)
+    X_test = np.vstack((X1_test, X2_test))
+    y_test = np.hstack((y1_test, y2_test))
+    return X_train, X_test, y_train, y_test
 
 
 class LMS(object):
@@ -57,30 +79,14 @@ class LMS(object):
 
 
 def main():
-    # get train dataset
-    X1_train = load_data('../data/Train1.txt')
-    y1 = np.empty(X1_train.shape[0]).astype(int)
-    y1.fill(0)
-    X2_train = load_data('../data/Train2.txt')
-    y2 = np.empty(X2_train.shape[0]).astype(int)
-    y2.fill(1)
-    X_train = np.vstack((X1_train, X2_train))
-    y_train = np.hstack((y1, y2))
+    # get kadai data
+    X_train, X_test, y_train, y_test = get_kadai1_dataset()
     # plot train data
-    plt.scatter(X1_train[:,0], X1_train[:,1], c='b', alpha=0.5, label='Train omega1')
-    plt.scatter(X2_train[:,0], X2_train[:,1], c='r', alpha=0.5, label='Train omega2')
-    # get test dataset
-    X1_test = load_data('../data/Test1.txt')
-    y1_test = np.empty(X1_test.shape[0]).astype(int)
-    y1_test.fill(0)
-    X2_test = load_data('../data/Test2.txt')
-    y2_test = np.empty(X2_test.shape[0]).astype(int)
-    y2_test.fill(1)
-    X_test = np.vstack((X1_test, X2_test))
-    y_test = np.hstack((y1_test, y2_test))
+    plt.scatter(X_train[y_train==0][:,0], X_train[y_train==0][:,1], c='b', alpha=0.5, label='Train omega1')
+    plt.scatter(X_train[y_train==1][:,0], X_train[y_train==1][:,1], c='r', alpha=0.5, label='Train omega2')
     # plot test data
-    plt.scatter(X1_test[:,0], X1_test[:,1], c='g', alpha=0.5, label='Test omega1')
-    plt.scatter(X2_test[:,0], X2_test[:,1], c='y', alpha=0.5, label='Test omega2')
+    plt.scatter(X_test[y_test==0][:,0], X_test[y_test==0][:,1], c='g', alpha=0.5, label='Test omega1')
+    plt.scatter(X_test[y_test==1][:,0], X_test[y_test==1][:,1], c='y', alpha=0.5, label='Test omega2')
     # lms computing
     lms = LMS()
     lms.fit(X_train, y_train)
@@ -95,7 +101,6 @@ def main():
     # plt.show()
     now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
     plt.savefig('../output/kadai1_plot_{}.png'.format(now))
-
     # save score
     score = lms.score(X_test, y_test)
     now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
