@@ -58,7 +58,7 @@ def main():
     lms = LMS()
     lms.fit(X_train, y_train)
     y_pred = lms.predict(X_test)
-    x = np.arange(-1, 5)
+    x = np.arange(-3, 5)
     y_lms = 1 / lms.w[1] * (0.5 - lms.w[0]*x - lms.w[2])
     plt.plot(x, y_lms, c='r', label='Classification surface (with LMS)', alpha=0.5)
     # compute weight with pseudoinverse
