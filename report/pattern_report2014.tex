@@ -1,0 +1,92 @@
+%        File: pattern_report2014.tex
+%     Created: Thu Jan 22 03:00 AM 2015 J
+% Last Change: Thu Jan 22 03:00 AM 2015 J
+%
+\documentclass[10pt,a4paper,twocolumn]{jarticle}
+
+%%%%%%%%%%%%%%%%%%%%%
+% to input Japanese %
+%%%%%%%%%%%%%%%%%%%%%
+\usepackage[japanese]{babel}
+
+%%%%%%%%%%%
+% unknown %
+%%%%%%%%%%%
+\usepackage{ascmac}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% to be standard a4paper %
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  total={210mm,297mm},
+  left=20mm,
+  right=20mm,
+  top=20mm,
+  bottom=40mm,
+}
+
+%%%%%%%%%%%%%%%%%%%%%
+% to insert figures %
+%%%%%%%%%%%%%%%%%%%%%
+\usepackage[dvipdfmx]{graphicx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% to insert source codes %
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \usepackage{listings, jlisting}
+% \renewcommand{\lstlistingname}{list}
+% \lstset{language=C,
+%   basicstyle=\ttfamily\scriptsize,
+%   commentstyle=\textit,
+%   classoffset=1,
+%   keywordstyle=\bfseries,
+%   frame=tRBl,
+%   framesep=5pt,
+%   showstringspaces=false,
+%   numbers=left,
+%   stepnumber=1,
+%   numberstyle=\tiny,
+%   tabsize=2
+% }
+
+%%%%%%%%%%%%%%%%%%
+% title & author %
+%%%%%%%%%%%%%%%%%%
+\title{パターン情報学　プログラミングレポート課題}
+\author{03-140299 東京大学機械情報工学科 3年 和田健太郎}
+
+%%%%%%%%%%%%%%%%%%
+% begin document %
+%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+
+\section{課題1}
+\begin{itembox}[1]{課題1}
+2 クラス（$\omega$1，$\omega$2）の識別問題を考える．データは 2 次元とする．配布するデータセットの説明を以下に示す．
+
+\begin{itemize}
+  \item Train1.txt，Train2.txt：$\omega$1，$\omega$2 に属する訓練データ集合．各データ数 50．
+  \item Test1.txt，Test2.txt： $\omega$1，$\omega$2 に属するテストデータ集合．各データ数 20．
+\end{itemize}
+
+2 クラスで，2 次元のデータに対するウィドロー・ホフのアルゴリズムを実装し，訓練データから分離超平面を
+学習せよ．また，テストデータの識別率（全テストデータ数に対する正しく識別されたテストデータ数の比率）を
+求めよ．さらに，訓練データ，テストデータ，学習された識別面を図示せよ．
+\end{itembox}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% to insert bibliography %
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{thebibliography}{9}
+%   \bibitem{inv1} Samuel R．Buss，"Introduction to Inverse Kinematics with Jacobian Transpose，Pseudoinverse and Damped Least Squares methods"
+% \end{thebibliography}
+
+%%%%%%%%%%%%%%%%
+% end document %
+%%%%%%%%%%%%%%%%
+\end{document}
+
