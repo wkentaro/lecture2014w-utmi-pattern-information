@@ -1,0 +1,46 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+from __future__ import division, print_function
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.spatial.distance import mahalanobis
+
+from kadai1 import load_data
+
+
+def get_kadai4_data():
+    omega1 = load_data('../data/omega1.txt')
+    omega2 = load_data('../data/omega2.txt')
+    omega3 = load_data('../data/omega3.txt')
+    return omega1, omega2, omega3
+
+
+def compute_mahalanobis():
+    omega1, omega2, omega3 = get_kadai4_data()
+    mu1 = omega1.mean(axis=0)
+    mu2 = omega2.mean(axis=0)
+    mu3 = omega3.mean(axis=0)
+
+    test_points = np.array(
+        [[1, 2, 1],
+         [5, 3, 2],
+         [0, 0, 0],
+         [1, 0, 0]])
+
+    # compute mahalanobis distance between
+    # test_points & mu of the set
+    mds = np.zeros((len(test_points), 3))
+    for i, tp in enumerate(test_points):
+        md1 = mahalanobis(tp, mu1, np.cov(omega1, rowvar=0))
+        md2 = mahalanobis(tp, mu2, np.cov(omega2, rowvar=0))
+        md3 = mahalanobis(tp, mu3, np.cov(omega3, rowvar=0))
+        mds[i] = [md1, md2, md3]
+
+    return mds
+
+
+if __name__ == '__main__':
+    mds = compute_mahalanobis()
+    print(mds)
