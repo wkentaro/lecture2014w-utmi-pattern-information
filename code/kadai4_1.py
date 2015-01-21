@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 from __future__ import division, print_function
+import datetime
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -47,4 +48,8 @@ def compute_mahalanobis():
 
 if __name__ == '__main__':
     mds = compute_mahalanobis()
-    print(mds)
+    now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+    with open('../output/kadai4_1_mahalanobis_{}.txt'.format(now), 'w') as f:
+        for md in mds:
+            md = map(str, md)
+            f.write(','.join(md)+'\n')
