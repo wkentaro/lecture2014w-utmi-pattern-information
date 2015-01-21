@@ -5,7 +5,6 @@ from __future__ import division, print_function
 
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.metrics import accuracy_score
 
 
 def load_data(filename):
@@ -62,8 +61,8 @@ def main():
     X_train = np.vstack((X1_train, X2_train))
     y_train = np.hstack((y1, y2))
     # plot train data
-    plt.scatter(X1_train[:,0], X1_train[:,1], c='b', alpha=0.5)
-    plt.scatter(X2_train[:,0], X2_train[:,1], c='r', alpha=0.5)
+    plt.scatter(X1_train[:,0], X1_train[:,1], c='b', alpha=0.5, label='Train omega1')
+    plt.scatter(X2_train[:,0], X2_train[:,1], c='r', alpha=0.5, label='Train omega2')
     # get test dataset
     X1_test = load_data('../data/Test1.txt')
     y1_test = np.empty(X1_test.shape[0]).astype(int)
@@ -74,18 +73,21 @@ def main():
     X_test = np.vstack((X1_test, X2_test))
     y_test = np.hstack((y1_test, y2_test))
     # plot test data
-    plt.scatter(X1_test[:,0], X1_test[:,1], c='g', alpha=0.5)
-    plt.scatter(X2_test[:,0], X2_test[:,1], c='y', alpha=0.5)
+    plt.scatter(X1_test[:,0], X1_test[:,1], c='g', alpha=0.5, label='Test omega1')
+    plt.scatter(X2_test[:,0], X2_test[:,1], c='y', alpha=0.5, label='Test omega2')
     # lms computing
     lms = LMS()
     lms.fit(X_train, y_train)
     y_pred = lms.predict(X_test)
-    # plot classifying surface
+    # plot classification surface
     x = np.arange(-3, 5)
     y = 1 / lms.w[1] * (0.5 - lms.w[0]*x - lms.w[2])
-    plt.plot(x, y, 'r')
-    # display the graph
-    plt.show()
+    plt.plot(x, y, 'r', label='Classification surface')
+
+    plt.legend(loc=2)
+    plt.ylim(None, 9)
+    # plt.show()
+    plt.savefig('../output/kadai1.png')
 
 
 if __name__ == '__main__':
