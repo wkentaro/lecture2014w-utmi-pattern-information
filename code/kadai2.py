@@ -8,37 +8,26 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
 
-
-def load_data(filename):
-    with open(filename, 'rb') as f:
-        data = []
-        for row in f.readlines():
-            data.append(map(float, row.split()))
-    return np.array(data)
+from kadai1 import load_data, LMS
 
 
-class LMS(object):
-    def __init__(self, eta=0.001, iterations=10000):
-        self.eta = eta
-        self.iterations = iterations
+def pinv(A):
+    A = np.atleast_2d(A)
+    return np.dot(np.linalg.inv(np.dot(A.T, A)), A.T)
+
+
+class WithPinv(object):
+    def __init__(self):
+        pass
 
     def fit(self, X_train, y_train):
-        assert X_train.shape[0] == y_train.shape[0]
-
         n_data = X_train.shape[0]
         dim = X_train.shape[1]
         X_train = np.concatenate(
             [X_train, np.ones(n_data).reshape(n_data, 1)],
             axis=1)
         y_train = y_train.reshape((n_data, 1))
-        w = np.ones(dim+1)
-        for i in range(self.iterations):
-            choice = np.random.randint(X_train.shape[0])
-            predict = np.dot(X_train[choice], w)
-            error = y_train[choice] - predict
-            dw = self.eta * error * X_train[choice]
-            w += dw
-        self.w = w
+        self.w = np.dot(pinv(X_train), y_train)
 
     def predict(self, X_test):
         n_data = X_test.shape[0]
@@ -81,26 +70,32 @@ def main():
     # plot test data
     plt.scatter(X1_test[:,0], X1_test[:,1], c='g', alpha=0.5, label='Test omega1')
     plt.scatter(X2_test[:,0], X2_test[:,1], c='y', alpha=0.5, label='Test omega2')
-    # lms computing
+    # compute weight with LMS
     lms = LMS()
     lms.fit(X_train, y_train)
     y_pred = lms.predict(X_test)
-    # plot classification surface
-    x = np.arange(-3, 5)
-    y = 1 / lms.w[1] * (0.5 - lms.w[0]*x - lms.w[2])
-    plt.plot(x, y, 'r', label='Classification surface')
+    x = np.arange(-1, 5)
+    y_lms = 1 / lms.w[1] * (0.5 - lms.w[0]*x - lms.w[2])
+    plt.plot(x, y_lms, c='r', label='Classification surface (with LMS)', alpha=0.5)
+    # compute weight with pseudoinverse
+    with_pinv = WithPinv()
+    with_pinv.fit(X_train, y_train)
+    y_with_pinv = 1 / with_pinv.w[1] * (0.5 - with_pinv.w[0]*x - with_pinv.w[2])
+    plt.plot(x, y_with_pinv, c='b', label='Classification surface (with pseudoinverse)', alpha=0.5)
     # setup the figure
     plt.legend(loc=2)
-    plt.ylim(None, 9)
+    plt.ylim(None, 13)
     # plt.show()
     now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-    plt.savefig('../output/kadai1_plot_{}.png'.format(now))
+    plt.savefig('../output/kadai2_plot_{}.png'.format(now))
 
     # save score
-    score = lms.score(X_test, y_test)
+    score_lms = lms.score(X_test, y_test)
+    score_with_pinv = with_pinv.score(X_test, y_test)
     now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-    with open('../output/kadai1_score_{}.txt'.format(now), 'w') as f:
-        f.write('score: {}\n'.format(score))
+    with open('../output/kadai2_score_{}.txt'.format(now), 'w') as f:
+        f.write('score_lms: {}\n'.format(score_lms))
+        f.write('score_with_pinv: {}\n'.format(score_with_pinv))
 
 
 if __name__ == '__main__':
