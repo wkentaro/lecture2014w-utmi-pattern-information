@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
+"""Assignment2
+
+Assignment:
+    * http://www.mi.t.u-tokyo.ac.jp/harada/lectures/pattern/patternreport20150116.pdf
+
+"""
 from __future__ import division, print_function
 import datetime
 
@@ -11,6 +17,8 @@ from kadai4_1 import (
     get_test_points,
     get_kadai4_data,
     )
+
+__author__ = "www.kentaro.wada@gmail.com (Kentaro Wada)"
 
 
 def generate_with_probability(probability):

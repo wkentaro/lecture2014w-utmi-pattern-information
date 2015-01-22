@@ -1,12 +1,24 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
+"""Assignment1
+
+Assignment:
+    * http://www.mi.t.u-tokyo.ac.jp/harada/lectures/pattern/patternreport20150116.pdf
+
+Reference:
+    * http://www.uni-weimar.de/medien/webis/teaching/lecturenotes/machine-learning/unit-en-ml-introduction.pdf
+    * http://nbviewer.ipython.org/github/mgrani/LODA-lecture-notes-on-data-analysis/blob/master/II.ML-and-DM/II.ML-and-DM-Example-LMS.ipynb
+
+"""
 from __future__ import division, print_function
 import datetime
 
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
+
+__author__ = "www.kentaro.wada@gmail.com (Kentaro Wada)"
 
 
 def load_data(filename):
