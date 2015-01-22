@@ -1,12 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
+"""Assignment4
+
+Assignment:
+    * http://www.mi.t.u-tokyo.ac.jp/harada/lectures/pattern/patternreport20150116.pdf
+
+"""
 from __future__ import division, print_function
 import datetime
 
 import numpy as np
 
 from kadai4_2 import generate_with_probability
+
+__author__ = "www.kentaro.wada@gmail.com (Kentaro Wada)"
 
 
 def main():
