@@ -32,13 +32,13 @@ def load_data(filename):
 def get_kadai1_dataset():
     # get train dataset
     X1_train = load_data('../data/Train1.txt')
-    y1 = np.empty(X1_train.shape[0]).astype(int)
-    y1.fill(0)
+    y1_train = np.empty(X1_train.shape[0]).astype(int)
+    y1_train.fill(0)
     X2_train = load_data('../data/Train2.txt')
-    y2 = np.empty(X2_train.shape[0]).astype(int)
-    y2.fill(1)
+    y2_train = np.empty(X2_train.shape[0]).astype(int)
+    y2_train.fill(1)
     X_train = np.vstack((X1_train, X2_train))
-    y_train = np.hstack((y1, y2))
+    y_train = np.hstack((y1_train, y2_train))
     # get test dataset
     X1_test = load_data('../data/Test1.txt')
     y1_test = np.empty(X1_test.shape[0]).astype(int)
