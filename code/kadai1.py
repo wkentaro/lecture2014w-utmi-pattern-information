@@ -102,7 +102,7 @@ def main():
     # lms computing
     lms = LMS()
     lms.fit(X_train, y_train)
-    y_pred = lms.predict(X_test)
+    # y_pred = lms.predict(X_test)
     # plot classification surface
     x = np.arange(-3, 5)
     y = 1 / lms.w[1] * (0.5 - lms.w[0]*x - lms.w[2])
