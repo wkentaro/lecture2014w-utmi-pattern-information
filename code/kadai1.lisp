@@ -3,14 +3,17 @@
 (defun split (str)
   (read-from-string (concatenate string "(" str ")")))
 
-(with-open-file (stream "../data/Train1.txt")
-  (setq raw nil)
-  (do ((line (read-line stream nil)
-             (read-line stream nil)))
-    ((null line))
-    (setq raw (append raw (list line)))))
 
-(setq data nil)
-(dolist (x raw)
-  (setq data (append data (list (split x)))))
-(print data)
+(defun load-data (fname)
+  ; raw data
+  (with-open-file (stream fname)
+    (setq raw nil)
+    (do ((line (read-line stream nil)
+              (read-line stream nil)))
+      ((null line))
+      (setq raw (append raw (list line)))))
+  ; make dataset
+  (setq data nil)
+  (dolist (x raw)
+    (setq data (append data (list (split x)))))
+  data)
