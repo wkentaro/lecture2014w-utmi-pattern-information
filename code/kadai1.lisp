@@ -20,5 +20,19 @@
     (incf i))
   data)
 
+(defun get-labels (len val)
+  (setq ret nil)
+  (dotimes (i len) (setq ret (cons val ret)))
+  ret)
+
+; train data
 (setq xtr1 (load-data "../data/Train1.txt"))
-(print xtr1)
+(setq ytr1 (get-labels (send xtr1 :get-val 'dim0) 0))
+(setq xtr2 (load-data "../data/Train2.txt"))
+(setq ytr2 (get-labels (send xtr2 :get-val 'dim0) 1))
+; test data
+(setq xts1 (load-data "../data/Test1.txt"))
+(setq yts1 (get-labels (send xts1 :get-val 'dim0) 0))
+(setq xts2 (load-data "../data/Test2.txt"))
+(setq yts2 (get-labels (send xts2 :get-val 'dim0) 1))
+
