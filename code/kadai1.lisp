@@ -13,7 +13,12 @@
       ((null line))
       (setq raw (append raw (list line)))))
   ; make dataset
-  (setq data nil)
+  (setq data (make-matrix (length raw) 2))
+  (setq i 0)
   (dolist (x raw)
-    (setq data (append data (list (split x)))))
+    (setf (matrix-row data i) (split x))
+    (incf i))
   data)
+
+(setq xtr1 (load-data "../data/Train1.txt"))
+(print xtr1)
