@@ -1,5 +1,4 @@
 #!/usr/bin/env eus
-;; kadai1.l
 
 (defun split (str)
   (read-from-string (concatenate string "(" str ")")))
