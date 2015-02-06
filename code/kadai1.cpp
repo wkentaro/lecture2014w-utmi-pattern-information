@@ -3,8 +3,13 @@
 #include <vector>
 #include <eigen3/Eigen/Core>
 #include <boost/algorithm/string.hpp>
+#include "utils.h"
 
-std::vector< std::vector<double> >
+Eigen::MatrixXd load_data(std::string filename);
+void vector2matrix(std::vector< std::vector<double> > vec, Eigen::MatrixXd * mat);
+
+
+Eigen::MatrixXd
 load_data(std::string filename)
 {
     // open file stream
@@ -26,38 +31,33 @@ load_data(std::string filename)
         data.push_back(row);
     }
 
+    // close file stream
     infile.close();
 
-    return data;
-}
+    // convert vector to matrix
+    Eigen::MatrixXd mat(data.size(), data[0].size());
+    vector2matrix(data, &mat);
 
-Eigen::MatrixXd
-vector2matrix(std::vector< std::vector<double> > vec)
-{
-    Eigen::MatrixXd mat(vec.size(), vec[0].size());
-    for (int i=0; i<vec.size(); i++) {
-        for (int j=0; j<vec[i].size(); j++) {
-            mat.block(i, j, 1, 1) << vec[i][j];
-        }
-    }
     return mat;
 }
 
-template<typename T>
-void display_data(T data)
+
+void vector2matrix(
+    std::vector< std::vector<double> > vec,
+    Eigen::MatrixXd * mat
+    )
 {
-    for (int i=0; i<data.size(); i++) {
-        for (int j=0; j<data[i].size(); j++) {
-            std::cout << data[i][j] << ", ";
+    for (int i=0; i<vec.size(); i++) {
+        for (int j=0; j<vec[i].size(); j++) {
+            mat->block(i, j, 1, 1) << vec[i][j];
         }
-        std::cout << std::endl;
     }
 }
 
+
 int main(int argc, char* argv[]) {
-    std::vector< std::vector<double> > data;
-    data = load_data("../data/Train1.txt");
     Eigen::MatrixXd mat;
-    mat = vector2matrix(data);
+    mat = load_data("../data/Train1.txt");
     std::cout << mat;
 }
+
