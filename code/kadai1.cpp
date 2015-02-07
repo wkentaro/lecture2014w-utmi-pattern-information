@@ -119,12 +119,34 @@ public:
 
 
 int main(int argc, char* argv[]) {
+    // train data
     Eigen::MatrixXd X_train1 = load_data("../data/Train1.txt");
-    Eigen::MatrixXd X_test1 = load_data("../data/Test1.txt");
+    Eigen::MatrixXd X_train2 = load_data("../data/Train2.txt");
     Eigen::VectorXd y_train1 = Eigen::VectorXd::Zero(X_train1.rows());
+    Eigen::VectorXd y_train2 = Eigen::VectorXd::Ones(X_train2.rows());
+    Eigen::MatrixXd X_train(X_train1.rows()+X_train2.rows(),
+                            X_train1.cols());
+    X_train << X_train1,
+               X_train2;
+    Eigen::VectorXd y_train(y_train1.rows()+y_train2.rows());
+    y_train << y_train1,
+               y_train2;
+    // test data
+    Eigen::MatrixXd X_test1 = load_data("../data/Test1.txt");
+    Eigen::MatrixXd X_test2 = load_data("../data/Test2.txt");
+    Eigen::VectorXd y_test1 = Eigen::VectorXd::Zero(X_test1.rows());
+    Eigen::VectorXd y_test2 = Eigen::VectorXd::Ones(X_test2.rows());
+    Eigen::MatrixXd X_test(X_test1.rows()+X_test2.rows(),
+                           X_test1.cols());
+    X_test << X_test1,
+              X_test2;
+    Eigen::VectorXd y_test(y_test1.rows()+y_test2.rows());
+    y_test << y_test1,
+              y_test2;
 
     LMS lms = LMS(0.001, 10000);
-    lms.fit(X_train1, y_train1);
-    Eigen::MatrixXd y_pred = lms.predict(X_test1);
+    lms.fit(X_train, y_train);
+    Eigen::MatrixXd y_pred = lms.predict(X_test);
+    std::cout << y_pred << std::endl;
 }
 
