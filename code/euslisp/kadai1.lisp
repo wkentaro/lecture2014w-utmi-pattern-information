@@ -29,12 +29,6 @@
   ret)
 
 
-; (defun get-vector (len val)
-;   (setq ret (make-matrix len 1))
-;   (dotimes (i len) (setf (matrix-row ret i) (list val)))
-;   ret)
-
-
 (defclass lms
   :super propertied-object
   :slots (eta iterations w))
@@ -122,27 +116,28 @@
   (setq yts (get-vector (+ len1 len2) 0))
   (dotimes (i len1) (setf (elt yts i) (elt yts1 i)))
   (dotimes (i len2) (setf (elt yts (+ i len1)) (elt yts2 i)))
+  ;; train and predict
+  (setq *lms* (instance lms :init 0.001 10000))
+  (send *lms* :fit xtr ytr)
+  ; (print (send *lms* :predict xts))
+  ;; plot graph
+  (setq w (send *lms* :get-val 'w))
+  (setq a (* (/ 1. (elt w 1)) (- 0.5 (elt w 2))))
+  (setq b (* (/ 1. (elt w 1)) (* -1 (elt w 0))))
+  (setq gp-command-list (list "set xlabel 'x';"
+                              "set ylabel 'y';"
+                              "plot '../../data/Train1.txt' using 1:2;"
+                              "replot '../../data/Train2.txt' using 1:2;"
+                              "replot '../../data/Test1.txt' using 1:2;"
+                              "replot '../../data/Test2.txt' using 1:2;"
+                              (format nil "replot y=~Ax+~A;" a b)
+                              "set term png;"
+                              "set output 'kadai1.png';"
+                              "replot;"))
+  (unix::system (format nil "gnuplot -e \"~A\""
+    (let ((str "")) (dolist (gpc gp-command-list) (setq str (format nil "~A ~A" str gpc))) str)))
   )
 
-
 (main)
-(setq *lms* (instance lms :init 0.001 10000))
-(send *lms* :fit xtr ytr)
-; (print (send *lms* :predict xts))
-(setq w (send *lms* :get-val 'w))
-(setq a (* (/ 1. (elt w 1)) (- 0.5 (elt w 2))))
-(setq b (* (/ 1. (elt w 1)) (* -1 (elt w 0))))
-(setq gp-command-list (list "set xlabel 'x';"
-                            "set ylabel 'y';"
-                            "plot '../../data/Train1.txt' using 1:2;"
-                            "replot '../../data/Train2.txt' using 1:2;"
-                            "replot '../../data/Test1.txt' using 1:2;"
-                            "replot '../../data/Test2.txt' using 1:2;"
-                            (format nil "replot y=~Ax+~A;" a b)
-                            "set term png;"
-                            "set output 'kadai1.png';"
-                            "replot;"))
-(unix::system (format nil "gnuplot -e \"~A\""
-  (let ((str "")) (dolist (gpc gp-command-list) (setq str (format nil "~A ~A" str gpc))) str)))
 (exit)
 
