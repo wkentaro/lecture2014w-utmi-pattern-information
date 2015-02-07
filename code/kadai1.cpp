@@ -13,6 +13,7 @@
 #include <random>
 #include <eigen3/Eigen/Core>
 #include <boost/algorithm/string.hpp>
+#include <boost/tuple/tuple.hpp>
 #include "utils.h"
 
 
@@ -95,7 +96,7 @@ public:
         for (int i=0; i<iterations; i++) {
             int choice = get_randint(0, X_.rows()-1);
             double predict = X_.row(choice) * w;
-            double error = y(choice) - predict;
+            double error = y[choice] - predict;
             Eigen::VectorXd dw = eta * error * X_.row(choice);
             w += dw;
         }
@@ -115,10 +116,23 @@ public:
         }
         return y_pred;
     }
+
+    float score(Eigen::MatrixXd X, Eigen::VectorXd y_true) {
+        Eigen::VectorXd y_pred = predict(X);
+        int n_accurate=0;
+        for (int i=0; i<y_pred.rows(); i++) {
+            // count number of accurate prediction
+            if (y_pred[i] == y_true[i]) n_accurate++;
+        }
+        float score = (float)n_accurate / (float)y_pred.rows();
+        return score;
+    }
 };
 
 
-int main(int argc, char* argv[]) {
+boost::tuple<Eigen::MatrixXd, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd>
+get_kadai1_dataset()
+{
     // train data
     Eigen::MatrixXd X_train1 = load_data("../data/Train1.txt");
     Eigen::MatrixXd X_train2 = load_data("../data/Train2.txt");
@@ -143,10 +157,23 @@ int main(int argc, char* argv[]) {
     Eigen::VectorXd y_test(y_test1.rows()+y_test2.rows());
     y_test << y_test1,
               y_test2;
+    return boost::make_tuple(X_train, y_train, X_test, y_test);
+}
 
+
+int main(int argc, char* argv[])
+{
+    boost::tuple<Eigen::MatrixXd, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd> dataset = get_kadai1_dataset();
+    Eigen::MatrixXd X_train = dataset.get<0>();
+    Eigen::VectorXd y_train = dataset.get<1>();
+    Eigen::MatrixXd X_test = dataset.get<2>();
+    Eigen::VectorXd y_test = dataset.get<3>();
+
+    // fit and predict
     LMS lms = LMS(0.001, 10000);
     lms.fit(X_train, y_train);
-    Eigen::MatrixXd y_pred = lms.predict(X_test);
-    std::cout << y_pred << std::endl;
+    // Eigen::VectorXd y_pred = lms.predict(X_test);
+    float score = lms.score(X_test, y_test);
+    std::cout << score << std::endl;
 }
 
