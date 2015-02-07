@@ -9,10 +9,10 @@ line=`echo $output | cut -f2 -d ','`
 gnuplot <<- EOF
   set xlabel "x"
   set ylabel "y
-  plot "../data/Train1.txt" using 1:2
-  replot "../data/Train2.txt" using 1:2
-  replot "../data/Test1.txt" using 1:2
-  replot "../data/Test2.txt" using 1:2
+  plot "../../data/Train1.txt" using 1:2
+  replot "../../data/Train2.txt" using 1:2
+  replot "../../data/Test1.txt" using 1:2
+  replot "../../data/Test2.txt" using 1:2
   replot $line
   set term png
   set output "kadai1.png"

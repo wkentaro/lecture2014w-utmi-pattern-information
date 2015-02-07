@@ -133,8 +133,8 @@ boost::tuple<Eigen::MatrixXd, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd>
 get_kadai1_dataset()
 {
     // train data
-    Eigen::MatrixXd X_train1 = load_data("../data/Train1.txt");
-    Eigen::MatrixXd X_train2 = load_data("../data/Train2.txt");
+    Eigen::MatrixXd X_train1 = load_data("../../data/Train1.txt");
+    Eigen::MatrixXd X_train2 = load_data("../../data/Train2.txt");
     Eigen::VectorXd y_train1 = Eigen::VectorXd::Zero(X_train1.rows());
     Eigen::VectorXd y_train2 = Eigen::VectorXd::Ones(X_train2.rows());
     Eigen::MatrixXd X_train(X_train1.rows()+X_train2.rows(),
@@ -145,8 +145,8 @@ get_kadai1_dataset()
     y_train << y_train1,
                y_train2;
     // test data
-    Eigen::MatrixXd X_test1 = load_data("../data/Test1.txt");
-    Eigen::MatrixXd X_test2 = load_data("../data/Test2.txt");
+    Eigen::MatrixXd X_test1 = load_data("../../data/Test1.txt");
+    Eigen::MatrixXd X_test2 = load_data("../../data/Test2.txt");
     Eigen::VectorXd y_test1 = Eigen::VectorXd::Zero(X_test1.rows());
     Eigen::VectorXd y_test2 = Eigen::VectorXd::Ones(X_test2.rows());
     Eigen::MatrixXd X_test(X_test1.rows()+X_test2.rows(),
