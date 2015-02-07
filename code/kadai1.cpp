@@ -14,7 +14,6 @@
 #include <eigen3/Eigen/Core>
 #include <boost/algorithm/string.hpp>
 #include <boost/tuple/tuple.hpp>
-#include "utils.h"
 
 
 Eigen::MatrixXd load_data(std::string filename);
@@ -173,7 +172,12 @@ int main(int argc, char* argv[])
     LMS lms = LMS(0.001, 10000);
     lms.fit(X_train, y_train);
     // Eigen::VectorXd y_pred = lms.predict(X_test);
-    float score = lms.score(X_test, y_test);
-    std::cout << score << std::endl;
+    double score = lms.score(X_test, y_test);
+    printf("%lf,", score);
+
+    double a = 1. / lms.w[1] * (0.5 - lms.w[2]);
+    double b = 1. / lms.w[1] * (-lms.w[0]);
+    printf("y=%lfx+%lf\n", a, b);
+    return 0;
 }
 
