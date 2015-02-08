@@ -20,7 +20,8 @@ C++ code
 .. code-block :: bash
 
   $ cd code/cpp
-  $ ./kadai1.sh
+  $ make
+  $ ./kadai1
 
 
 Euslisp code

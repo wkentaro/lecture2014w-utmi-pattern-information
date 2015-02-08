@@ -173,11 +173,28 @@ int main(int argc, char* argv[])
     lms.fit(X_train, y_train);
     // Eigen::VectorXd y_pred = lms.predict(X_test);
     double score = lms.score(X_test, y_test);
-    printf("%lf,", score);
+    // printf("%lf,", score);
 
     double a = 1. / lms.w[1] * (0.5 - lms.w[2]);
     double b = 1. / lms.w[1] * (-lms.w[0]);
-    printf("y=%lfx+%lf\n", a, b);
+    std::vector<std::string> gp_command_list;
+    gp_command_list.push_back("set xlabel 'x';");
+    gp_command_list.push_back("set ylabel 'y';");
+    gp_command_list.push_back("plot '../../data/Train1.txt' using 1:2;");
+    gp_command_list.push_back("replot '../../data/Train2.txt' using 1:2;");
+    gp_command_list.push_back("replot '../../data/Test1.txt' using 1:2;");
+    gp_command_list.push_back("replot '../../data/Test2.txt' using 1:2;");
+    gp_command_list.push_back("replot y="+std::to_string(a)+"x+"+std::to_string(b)+";");
+    gp_command_list.push_back("set term png;");
+    gp_command_list.push_back("set output 'kadai1.png';");
+    gp_command_list.push_back("replot;");
+    std::string gpc = "gnuplot -e \"";
+    for (int i=0; i<gp_command_list.size(); i++) {
+        gpc += gp_command_list[i];
+        gpc += " ";
+    }
+    gpc += "\"";
+    std::system(gpc.c_str());
     return 0;
 }
 
