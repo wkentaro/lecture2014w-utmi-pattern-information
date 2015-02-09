@@ -1,4 +1,4 @@
-pattern_information
+pattern-information
 ===================
 
 Python code
