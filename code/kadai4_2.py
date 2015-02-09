@@ -29,7 +29,7 @@ def generate_with_probability(probability):
         g = []
         for j, omg in enumerate(omega):
             g.append(
-                - 1 / 2 * md[j]**2
+                - 1 / 2 * md[j]
                 - 1 / 2 * np.log(np.linalg.norm(np.cov(omg, rowvar=0)))
                 - omg.shape[1]/2 * np.log(2 * np.pi)
                 + np.log(probability[j]))
@@ -42,6 +42,8 @@ def generate_with_probability(probability):
 
 def main():
     y_pred = generate_with_probability(probability=[1/3,1/3,1/3])
+    print("==> y_pred = {}".format(y_pred))
+
     now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
     with open('../output/kadai4_2_pred_{}.txt'.format(now), 'w') as f:
         y_pred = map(str, y_pred)
