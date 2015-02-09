@@ -7,8 +7,6 @@ import datetime
 import numpy as np
 import matplotlib.pyplot as plt
 
-from sklearn import preprocessing
-
 
 def get_iris_dataset():
     data = np.loadtxt('../data/iris.txt')
@@ -73,7 +71,6 @@ class FisherLDA(object):
 
 def main():
     X, y = get_iris_dataset()
-    X = preprocessing.scale(X)
 
     # PCA
     pca = PCA(n_components=1)
