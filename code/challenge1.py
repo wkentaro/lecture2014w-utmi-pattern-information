@@ -7,6 +7,8 @@ import datetime
 import numpy as np
 import matplotlib.pyplot as plt
 
+from sklearn import preprocessing
+
 
 def get_iris_dataset():
     data = np.loadtxt('../data/iris.txt')
@@ -54,54 +56,51 @@ class FisherLDA(object):
     def transform(self, X):
         return np.dot(X, self.W)
 
-    def between_class_cov(self, X, y):
-        mu = np.mean(X, axis=0)
-        class_covs = []
-        for cls in np.unique(y):
-            delta = X[y == cls].mean(axis=0) - mu
-            class_covs.append(np.dot(delta, delta.T))
-        return np.sum(class_covs, axis=0)
-
     def within_class_cov(self, X, y):
         return np.sum(
             [np.cov(X[y==cls], rowvar=0) for cls in np.unique(y)],
             axis=0)
 
+    def between_class_cov(self, X, y):
+        mu = np.mean(X, axis=0)
+        class_covs = []
+        for cls in np.unique(y):
+            delta = X[y == cls].mean(axis=0) - mu
+            delta = np.atleast_2d(delta).T
+            class_covs.append(sum(y==cls) * np.dot(delta, delta.T))
+        return np.sum(class_covs, axis=0)
+
 
 def main():
     X, y = get_iris_dataset()
+    X = preprocessing.scale(X)
 
     # PCA
-    ## decomposition
     pca = PCA(n_components=1)
     pca.fit(X)
     X_pca_trans = pca.transform(X)
-    ## plot
-    plt.title('PCA decomposition')
-    for cls in np.unique(y):
-        x = X_pca_trans[y == cls]
-        plt.plot(x, np.zeros(len(x)), label='class{}'.format(cls))
-    plt.legend(loc=2)
-    # plt.show()
-    now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-    plt.savefig('../output/challenge1_pca_plot_{}.png'.format(now))
-    plt.cla()
-
     # Fisher LDA
-    ## decomposition
     flda = FisherLDA(n_components=1)
     flda.fit(X, y)
     X_flda_trans = flda.transform(X)
     ## plot
     plt.title('FisherLDA decomposition')
+    X_pca_trans -= X_pca_trans.min()
+    X_pca_trans /= X_pca_trans.max()
+    X_flda_trans -= X_flda_trans.min()
+    X_flda_trans /= X_flda_trans.max()
     for cls in np.unique(y):
-        x = X_flda_trans[y==cls]
-        plt.plot(x, np.zeros(len(x)), label='class{}'.format(cls))
+        x_pca = X_pca_trans[y == cls]
+        plt.plot(x_pca, np.ones(len(x_pca)),
+            label='class{} (PCA)'.format(cls))
+        x_flda = X_flda_trans[y==cls]
+        plt.plot(x_flda, np.zeros(len(x_flda)),
+            label='class{} (FisherLDA)'.format(cls))
+    plt.ylim(-0.5, 3)
     plt.legend(loc=2)
     # plt.show()
     now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-    plt.savefig('../output/challenge1_flda_plot_{}.png'.format(now))
-    plt.cla()
+    plt.savefig('../output/challenge1_plot_{}.png'.format(now))
 
 
 if __name__ == '__main__':
