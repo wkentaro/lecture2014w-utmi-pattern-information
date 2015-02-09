@@ -14,11 +14,17 @@ from __future__ import division, print_function
 import datetime
 
 import numpy as np
-from scipy.spatial.distance import mahalanobis
 
 from kadai1 import load_data
 
 __author__ = "www.kentaro.wada@gmail.com (Kentaro Wada)"
+
+
+def mahalanobis(u, v, cov):
+    delta = u - v
+    VI = np.linalg.inv(cov)
+    m = np.dot(np.dot(delta, VI), delta)
+    return np.sqrt(m)
 
 
 def get_kadai4_data():
@@ -35,6 +41,7 @@ def get_test_points():
          [0, 0, 0],
          [1, 0, 0]])
     return test_points
+
 
 def compute_mahalanobis():
     omega1, omega2, omega3 = get_kadai4_data()
