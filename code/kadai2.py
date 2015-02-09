@@ -30,7 +30,7 @@ class WithPinv(object):
 
     def fit(self, X_train, y_train):
         n_data = X_train.shape[0]
-        dim = X_train.shape[1]
+        # dim = X_train.shape[1]
         X_train = np.concatenate(
             [X_train, np.ones(n_data).reshape(n_data, 1)],
             axis=1)
@@ -65,7 +65,7 @@ def main():
     # compute weight with LMS
     lms = LMS()
     lms.fit(X_train, y_train)
-    y_pred = lms.predict(X_test)
+    # y_pred = lms.predict(X_test)
     x = np.arange(-3, 5)
     y_lms = 1 / lms.w[1] * (0.5 - lms.w[0]*x - lms.w[2])
     plt.plot(x, y_lms, c='r', label='Classification surface (with LMS)', alpha=0.5)

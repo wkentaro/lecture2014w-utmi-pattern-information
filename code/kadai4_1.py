@@ -14,7 +14,6 @@ from __future__ import division, print_function
 import datetime
 
 import numpy as np
-import matplotlib.pyplot as plt
 from scipy.spatial.distance import mahalanobis
 
 from kadai1 import load_data

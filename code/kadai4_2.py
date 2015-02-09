@@ -14,7 +14,6 @@ import numpy as np
 
 from kadai4_1 import (
     compute_mahalanobis,
-    get_test_points,
     get_kadai4_data,
     )
 

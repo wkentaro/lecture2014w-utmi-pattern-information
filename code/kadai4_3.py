@@ -10,8 +10,6 @@ Assignment:
 from __future__ import division, print_function
 import datetime
 
-import numpy as np
-
 from kadai4_2 import generate_with_probability
 
 __author__ = "www.kentaro.wada@gmail.com (Kentaro Wada)"

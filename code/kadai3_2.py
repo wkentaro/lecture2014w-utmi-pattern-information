@@ -20,7 +20,6 @@ def main():
     # get kadai data
     X_train, X_test, y_train, y_test = get_kadai1_dataset()
     # variate k from 1 to 10
-    scores = []
     best_k = analyze_kvalue(do_plot=False)
     knn = KNearestNeighbor(k=best_k)
     knn.fit(X_train, y_train)
