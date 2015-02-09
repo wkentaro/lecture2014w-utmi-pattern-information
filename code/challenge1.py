@@ -89,12 +89,12 @@ def main():
     X_pca_trans /= X_pca_trans.max()
     X_flda_trans -= X_flda_trans.min()
     X_flda_trans /= X_flda_trans.max()
-    for cls in np.unique(y):
+    for i, cls in enumerate(np.unique(y)):
         x_pca = X_pca_trans[y == cls]
-        plt.plot(x_pca, np.ones(len(x_pca)),
+        plt.plot(x_pca, np.ones(len(x_pca)) + 0.05*i,
             label='class{} (PCA)'.format(cls))
         x_flda = X_flda_trans[y==cls]
-        plt.plot(x_flda, np.zeros(len(x_flda)),
+        plt.plot(x_flda, np.zeros(len(x_flda)) + 0.05*i,
             label='class{} (FisherLDA)'.format(cls))
     plt.ylim(-0.5, 3)
     plt.legend(loc=2)
