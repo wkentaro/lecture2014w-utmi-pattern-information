@@ -19,43 +19,48 @@
 を表\ref{tbl:mahalanobis}に計算した. 
 
 \begin{table}[htbp]
-  \begin{small}
+  \begin{center}
     \begin{tabular}{cccc}
       sample points & $\omega_1$ & $\omega_2$ & $\omega_3$ \\
-      $(1, 2, 1)^T$ & 21.275575 & 15.5762194 & 9.85157479 \\
-      $(5, 3, 2)^T$ & 39.1226698 & 37.4144013 & 9.82164589 \\
-      $(0, 0, 0)^T$ & 9.175011 & 4.78336417 & 23.4702917 \\
-      $(1, 0, 0)^T$ & 12.0187365 & 9.85778568 & 20.7996021
+      $(1, 2, 1)^T$ & 1.0149706212 & 0.85805119543 & 2.67475703681  \\
+      $(5, 3, 2)^T$ & 1.557138211 & 1.75568068865 & 0.647009014093 \\
+      $(0, 0, 0)^T$ & 0.489961541569 & 0.268432411153 & 2.24150137149  \\
+      $(1, 0, 0)^T$ & 0.487236758687 & 0.451834352153 & 1.46233640166  \\
     \end{tabular}
     \caption{テスト点の各クラス集合の平均とのマハラノビス距離}
     \label{tbl:mahalanobis}
-  \end{small}
+  \end{center}
 \end{table}
 
 確率的生成モデルを用いて, これらのテスト点を識別したところ, 
-表\ref{tbl:prob-discrimination-1}に示す識別結果となった. ($P(\omega_i)$ = 1/3)
+表~\ref{tbl:prob-discrimination-1}に示す識別結果となった.
+($P(\omega_i)$ = 1/3)
 
 $P(\omega_1)=0.8$, $P(\omega_2)=P(\omega_3)=0.1$として識別を行ったところ
-表\ref{tbl:prob-discrimination-2}に示す識別結果となり, 
-表\ref{tbl:prob-discrimination-1}と同じ結果となった. 
+表\ref{tbl:prob-discrimination-2}に示す識別結果となり,
+$\omega_1$にすべてのテスト点が分類されるものとなった.
 
 \begin{table}[htbp]
-  \begin{tabular}{cccc}
-    % test point 1 & test point 2 & test point 3 & test point 4 \\
-    $(1, 2, 1)^T$ & $(5, 3, 2)^T$ & $(0, 0, 0)^T$ & $(1, 0, 0)^T$ \\
-    $\omega_2$ & $\omega_2$ & $\omega_1$ & $\omega_1$
-  \end{tabular}
-  \caption{$P{\omega_i}=1/3$での識別結果}
-  \label{tbl:prob-discrimination-1}
+  \begin{center}
+    \begin{tabular}{cccc}
+      % test point 1 & test point 2 & test point 3 & test point 4 \\
+      $(1, 2, 1)^T$ & $(5, 3, 2)^T$ & $(0, 0, 0)^T$ & $(1, 0, 0)^T$ \\
+      $\omega_1$ & $\omega_3$ & $\omega_1$ & $\omega_1$
+    \end{tabular}
+    \caption{$P{\omega_i}=1/3$での識別結果}
+    \label{tbl:prob-discrimination-1}
+  \end{center}
 \end{table}
 
 \begin{table}[htbp]
-  \begin{tabular}{cccc}
-    % test point 1 & test point 2 & test point 3 & test point 4 \\
-    $(1, 2, 1)^T$ & $(5, 3, 2)^T$ & $(0, 0, 0)^T$ & $(1, 0, 0)^T$ \\
-    $\omega_2$ & $\omega_2$ & $\omega_1$ & $\omega_1$
-  \end{tabular}
-  \caption{$P{\omega_1}=0.8$, $P{\omega_2}=P{\omega_3}=0.1$ での識別結果}
-  \label{tbl:prob-discrimination-2}
+  \begin{center}
+    \begin{tabular}{cccc}
+      % test point 1 & test point 2 & test point 3 & test point 4 \\
+      $(1, 2, 1)^T$ & $(5, 3, 2)^T$ & $(0, 0, 0)^T$ & $(1, 0, 0)^T$ \\
+      $\omega_1$ & $\omega_1$ & $\omega_1$ & $\omega_1$
+    \end{tabular}
+    \caption{$P{\omega_1}=0.8$, $P{\omega_2}=P{\omega_3}=0.1$ での識別結果}
+    \label{tbl:prob-discrimination-2}
+  \end{center}
 \end{table}
 
