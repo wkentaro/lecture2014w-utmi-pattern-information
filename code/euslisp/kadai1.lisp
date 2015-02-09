@@ -136,6 +136,7 @@
                               "replot;"))
   (unix::system (format nil "gnuplot -e \"~A\""
     (let ((str "")) (dolist (gpc gp-command-list) (setq str (format nil "~A ~A" str gpc))) str)))
+  (format t "score: ~A~%" (send *lms* :score xts yts))
   )
 
 (main)
