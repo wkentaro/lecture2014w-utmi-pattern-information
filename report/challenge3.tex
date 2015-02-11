@@ -1,0 +1,29 @@
+\section{チャレンジ課題3}\label{section:challenge3}
+\begin{itembox}{チャレンジ課題3}
+  表情認識を行うプログラムを作成せよ.データセットには日本人女性の顔のデータセット(JAFFE データセッ ト)を用いよ.JAFFE データセットには 10 名の被験者から得られた 213 枚の画像が含まれ,7 つの表情(幸福, 悲しみ,驚き,怒り,不快,恐れ,無表情)を行っている.
+  このデータセットで,10 名のうち 9 名の画像を用いて学習を行った後,残りの 1 名に対して表情識別テストを 行え.この試行を 10 名に対して繰り返すことで 10 名分の平均識別率を求めよ.画像からの特徴量,表情の識別 手法は各自好きなものを用いて良い.もちろん独自に勉強した手法も大歓迎.7 つの表情を全て識別させるのは難 しいので,幸福と悲しみの 2 クラスだけでもよい.
+\end{itembox}
+
+特徴抽出をHOG, Autoencoder~\cite{autoencoder}を用いて行った.
+特徴抽出と識別率は表~\ref{tbl:feature-extraction-score}のようになった.
+
+\begin{table}[htbp]
+  \begin{center}
+    \begin{tabular}{cc}
+      特徴抽出 & 識別率 \\
+      None & 0.5812836 \\
+      HOG & 0.5887888  \\
+      Autoencoder & 0.2878157 \\
+      HOG+Autoencoder & 0.4934857  \\
+    \end{tabular}
+    \caption{特徴抽出と識別率}
+    \label{tbl:feature-extraction-score}
+  \end{center}
+\end{table}
+
+% \begin{figure}[htbp]
+%   \centering
+%   \includegraphics[width=0.8\textwidth]{./assets/}
+%   \caption{}<++>
+%   \label{fig:challenge2}
+% \end{figure}

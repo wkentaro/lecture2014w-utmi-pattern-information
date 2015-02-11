@@ -25,7 +25,7 @@ def generate_with_probability(probability):
 
     y_pred = []
     mds = compute_mahalanobis()
-    for i, md in enumerate(mds):
+    for i, md in enumerate(mds):  # iterate test points
         g = []
         for j, omg in enumerate(omega):
             g.append(
