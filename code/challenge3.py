@@ -12,7 +12,7 @@ import collections
 
 import numpy as np
 from skimage.io import imread
-from sklearn.svm import SVC
+# from sklearn.svm import SVC
 from sklearn import preprocessing
 from skimage.feature import hog
 from sklearn.linear_model import LogisticRegression
@@ -105,24 +105,25 @@ def main():
     print("... getting dataset")
     X, y, person_data = get_challenge3_dataset()
 
-    # params = {'C': 1e0, 'kernel': 'rbf'} # 0.475244682853
-    # params = {'C': 1e1, 'kernel': 'rbf'} # 0.523185582533
+    # params = {'C': 1e0, 'kernel': 'rbf'} # hog: 0.475244682853 # origin: 0.467028044419 
+    # params = {'C': 1e1, 'kernel': 'rbf'} # 0.523185582533 # origin: 0.506211180124
     # params = {'C': 1e2, 'kernel': 'rbf'} # 0.523185582533
     # params = {'C': 1e3, 'kernel': 'rbf'} # 0.523185582533
     # params = {'C': 1e4, 'kernel': 'rbf'} # 0.523185582533
     # params = {'C': 1e0, 'kernel': 'linear'} # hog: 0.588788819876 # origin: 0.581283643892
-    params = {'C': 1e1, 'kernel': 'linear'} # 0.588788819876
+    # params = {'C': 1e1, 'kernel': 'linear'} # 0.588788819876 # 0.581283643892
     # params = {'C': 1e2, 'kernel': 'linear'} # 0.588788819876
     # params = {'C': 1e3, 'kernel': 'linear'} # 0.588788819876
     # params = {'C': 1e4, 'kernel': 'linear'} # 0.588788819876
-    clf = SVC(**params)
+    # clf = SVC(**params)
 
-    # params = {'C': 1e0}
-    # params = {'C': 1e0}
-    # params = {'C': 1e0}
-    # params = {'C': 1e0}
-    # params = {'C': 1e0}
-    # clf = LogisticRegression(**params)
+    # params = {'C': 1e0}  # hog: 0.612842085451 # origin: 0.660273856578
+    # params = {'C': 1e1}  # 0.617842085451 # 0.655926030491
+    # params = {'C': 1e2}  # 0.608080180689 # 0.645966497271
+    # params = {'C': 1e3}  # 0.612625635234 # 0.669559570864
+    # params = {'C': 1e4}  # 0.612625635234 # 0.66086391869
+    params = {'C': 1e5}  # 0.612625635234
+    clf = LogisticRegression(**params)
 
     print('... params: {}'.format(params))
 

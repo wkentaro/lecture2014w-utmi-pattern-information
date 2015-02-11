@@ -5,19 +5,21 @@
 \end{itembox}
 
 特徴抽出をHOG, Autoencoder~\cite{autoencoder}を用いて行い,
-識別器はSVM~\cite{sklearn-svm}を利用した.
+識別器はSVM~\cite{sklearn-svm}とロジスティック回帰を利用した.
 特徴抽出と識別率は表~\ref{tbl:feature-extraction-score}のようになった.
 
 \begin{table}[htbp]
   \begin{center}
-    \begin{tabular}{cc}
-      特徴抽出 & 識別率 \\
-      None & 0.5812836 \\
-      HOG & 0.5887888  \\
-      Autoencoder & 0.2878157 \\
-      HOG+Autoencoder & 0.4934857  \\
+    \begin{tabular}{ccc}
+      特徴抽出 & 識別器 & 識別率 \\
+      None & SVM & 0.5812836 \\
+      HOG & SVM & 0.5887888  \\
+      Autoencoder & SVM & 0.2878157 \\
+      HOG+Autoencoder & SVM & 0.4934857  \\
+      None & ロジスティック回帰 & 0.6695595 \\
+      HOG & ロジスティック回帰 & 0.6126256 \\
     \end{tabular}
-    \caption{特徴抽出と識別率}
+    \caption{特徴抽出, 識別器と識別率}
     \label{tbl:feature-extraction-score}
   \end{center}
 \end{table}
