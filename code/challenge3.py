@@ -9,6 +9,7 @@ from skimage.io import imread
 from sklearn.svm import SVC
 from sklearn import preprocessing
 from skimage.feature import hog
+from sklearn.linear_model import LogisticRegression
 
 
 def get_jaffe_data():
@@ -59,7 +60,6 @@ def get_challenge3_dataset():
         import theano.tensor as T
         return 1. / (1. + T.exp(-1 * x))
     method = 'hog'
-    # method = 'autoencoder'
     if method == 'autoencoder':
         X = np.zeros((images.shape[0], images[0].size))
         for i, img in enumerate(images):
@@ -71,17 +71,21 @@ def get_challenge3_dataset():
         ae.train(n_epochs=10)
         X = ae.get_hidden(X)[0]
     elif method == 'hog':
-        # extracting feature
         X = np.zeros((images.shape[0], 72900))
         for i, img in enumerate(images):
             hog_img = hog(img)
             X[i] = hog_img
-    ae = AutoEncoder(X,
-        hidden_size=1000,
-        activation_function=sigmoid,
-        output_function=sigmoid)
-    ae.train(n_epochs=100)
-    X = ae.get_hidden(X)[0]
+    elif method == 'hog+autoencoder':
+        X = np.zeros((images.shape[0], 72900))
+        for i, img in enumerate(images):
+            hog_img = hog(img)
+            X[i] = hog_img
+        ae = AutoEncoder(X,
+            hidden_size=1000,
+            activation_function=sigmoid,
+            output_function=sigmoid)
+        ae.train(n_epochs=100)
+        X = ae.get_hidden(X)[0]
     return X, labels, person_data
 
 
@@ -94,13 +98,17 @@ def main():
     # params = {'C': 1e2, 'kernel': 'rbf'} # 0.523185582533
     # params = {'C': 1e3, 'kernel': 'rbf'} # 0.523185582533
     # params = {'C': 1e4, 'kernel': 'rbf'} # 0.523185582533
-    params = {'C': 1e0, 'kernel': 'linear'} # 0.588788819876
+    # params = {'C': 1e0, 'kernel': 'linear'} # 0.588788819876
     # params = {'C': 1e1, 'kernel': 'linear'} # 0.588788819876
     # params = {'C': 1e2, 'kernel': 'linear'} # 0.588788819876
     # params = {'C': 1e3, 'kernel': 'linear'} # 0.588788819876
     # params = {'C': 1e4, 'kernel': 'linear'} # 0.588788819876
+    # clf = SVC(**params)
+
+    params = {'C': 1e0}
+    clf = LogisticRegression(**params)
+
     print('... params: {}'.format(params))
-    clf = SVC(**params)
 
     # get scores
     print('... getting scores')
