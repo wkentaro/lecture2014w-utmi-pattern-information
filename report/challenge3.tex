@@ -7,6 +7,10 @@
 特徴抽出をHOG, Autoencoder~\cite{autoencoder}を用いて行い,
 識別器はSVM~\cite{sklearn-svm}とロジスティック回帰を利用した.
 特徴抽出と識別率は表~\ref{tbl:feature-extraction-score}のようになった.
+Noneは特徴抽出なしで画像を直接入力として識別したものである.
+
+特徴抽出なしでロジスティック回帰を用いたものが最も良い識別率
+を示し,67\%であった.
 
 \begin{table}[htbp]
   \begin{center}
@@ -23,3 +27,4 @@
     \label{tbl:feature-extraction-score}
   \end{center}
 \end{table}
+
