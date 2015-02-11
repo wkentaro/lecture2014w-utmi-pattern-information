@@ -25,15 +25,16 @@ def generate_with_probability(probability):
 
     y_pred = []
     mds = compute_mahalanobis()
-    for i, md in enumerate(mds):  # iterate test points
+    for md in mds:  # iterate test points
         g = []
-        for j, omg in enumerate(omega):
+        for j, omg_j in enumerate(omega):
             g.append(
-                - 1 / 2 * md[j]
-                - 1 / 2 * np.log(np.linalg.norm(np.cov(omg, rowvar=0)))
-                - omg.shape[1]/2 * np.log(2 * np.pi)
+                - 1 / 2 * md[j]**2
+                - 1 / 2 * np.log(np.linalg.det(np.cov(omg_j, rowvar=0)))
+                - omg_j.shape[1]/2 * np.log(2 * np.pi)
                 + np.log(probability[j]))
         g = np.array(g)
+        print(g)
         # index = 0: omega1, 1: omega2, 2: omega3
         index = np.argmax(g)
         y_pred.append(index)

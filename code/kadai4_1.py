@@ -65,6 +65,7 @@ def compute_mahalanobis():
 
 if __name__ == '__main__':
     mds = compute_mahalanobis()
+    print(mds)
     now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
     with open('../output/kadai4_1_mahalanobis_{}.txt'.format(now), 'w') as f:
         for md in mds:
