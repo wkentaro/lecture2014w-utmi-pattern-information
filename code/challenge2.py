@@ -3,6 +3,9 @@
 #
 """Challenge2
 
+Assignment:
+    * http://www.mi.t.u-tokyo.ac.jp/harada/lectures/pattern/patternreport20150116.pdf
+
 Reference:
     * Pattern Recognisiona and Machine Learning, P202-207
 
@@ -15,6 +18,8 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
 
 from kadai1 import get_kadai1_dataset
+
+__author__ = 'www.kentaro.wada@gmail.com (Kentaro Wada)'
 
 
 def sigmoid(x, a=-1):
