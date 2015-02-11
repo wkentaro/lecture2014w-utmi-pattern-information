@@ -1,6 +1,12 @@
 pattern-information
 ===================
 
+Codes
++++++
+
+Execute below to get output in :code:`output/` dir.
+
+
 Python code
 
 .. code-block :: bash
@@ -13,6 +19,9 @@ Python code
   $ python kadai4_1.py
   $ python kadai4_2.py
   $ python kadai4_3.py
+  $ python challenge1.py
+  $ python challenge2.py
+  $ python challenge2.py
 
 
 C++ code
