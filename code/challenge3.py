@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
+"""Challenge2
+
+Assignment:
+    * http://www.mi.t.u-tokyo.ac.jp/harada/lectures/pattern/patternreport20150116.pdf
+
+"""
 from __future__ import print_function, division
 import collections
 
@@ -10,6 +16,8 @@ from sklearn.svm import SVC
 from sklearn import preprocessing
 from skimage.feature import hog
 from sklearn.linear_model import LogisticRegression
+
+__author__ = "www.kentaro.wada@gmail.com (Kentaro Wada)"
 
 
 def get_jaffe_data():

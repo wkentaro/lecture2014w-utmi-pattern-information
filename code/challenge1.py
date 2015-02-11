@@ -1,11 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
+"""Challenge1
+
+Assignment:
+    * http://www.mi.t.u-tokyo.ac.jp/harada/lectures/pattern/patternreport20150116.pdf
+
+"""
 from __future__ import print_function, division
 import datetime
 
 import numpy as np
 import matplotlib.pyplot as plt
+
+__author__ = 'www.kentaro.wada@gmail.com (Kentaro Wada)'
 
 
 def get_iris_dataset():
