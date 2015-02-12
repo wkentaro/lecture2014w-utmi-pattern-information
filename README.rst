@@ -4,13 +4,13 @@ pattern-information
 Summary
 +++++++
 
-Assignment1: Windrow-Hoff Algorithm to get decisive surface.
-Assignment2: Use pseudo-inverse to map data to label.
-Assignment3: K-Nearest Neighbors.
-Assignment4: Probability generation model.
-Challenge1: PCA and FisherLDA.
-Challenge2: LogisticRegression for 2 classes.
-Challenge3: Emotion discrimination.
+* Assignment1: Windrow-Hoff Algorithm to get decisive surface.
+* Assignment2: Use pseudo-inverse to map data to label.
+* Assignment3: K-Nearest Neighbors.
+* Assignment4: Probability generation model.
+* Challenge1: PCA and FisherLDA.
+* Challenge2: LogisticRegression for 2 classes.
+* Challenge3: Emotion discrimination.
 
 
 Codes
