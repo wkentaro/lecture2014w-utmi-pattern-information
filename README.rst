@@ -1,5 +1,8 @@
 pattern-information
 ===================
+- Assignments of class in UTokyo "Pattern Information".  
+- http://www.mi.t.u-tokyo.ac.jp/harada/lectures/pattern/patternreport20150116.pdf
+ 
 
 Summary
 +++++++
