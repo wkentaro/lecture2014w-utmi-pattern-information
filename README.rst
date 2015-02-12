@@ -1,6 +1,18 @@
 pattern-information
 ===================
 
+Summary
++++++++
+
+Assignment1: Windrow-Hoff Algorithm to get decisive surface.
+Assignment2: Use pseudo-inverse to map data to label.
+Assignment3: K-Nearest Neighbors.
+Assignment4: Probability generation model.
+Challenge1: PCA and FisherLDA.
+Challenge2: LogisticRegression for 2 classes.
+Challenge3: Emotion discrimination.
+
+
 Codes
 +++++
 
@@ -12,16 +24,16 @@ Python code
 .. code-block :: bash
 
   $ cd code
-  $ python kadai1.py
-  $ python kadai2.py
-  $ python kadai3_1.py
-  $ python kadai3_2.py
-  $ python kadai4_1.py
-  $ python kadai4_2.py
-  $ python kadai4_3.py
-  $ python challenge1.py
-  $ python challenge2.py
-  $ python challenge2.py
+  $ python kadai1.py       # Assignment1
+  $ python kadai2.py       # Assignment2
+  $ python kadai3_1.py     # Assignment3
+  $ python kadai3_2.py     # Assignment3
+  $ python kadai4_1.py     # Assignment4
+  $ python kadai4_2.py     # Assignment4
+  $ python kadai4_3.py     # Assignment4
+  $ python challenge1.py   # Challenge1
+  $ python challenge2.py   # Challenge2
+  $ python challenge3.py   # Challenge3
 
 
 C++ code
