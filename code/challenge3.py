@@ -1,10 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-"""Challenge2
+"""Challenge3
 
 Assignment:
     * http://www.mi.t.u-tokyo.ac.jp/harada/lectures/pattern/patternreport20150116.pdf
+
+Reference:
+    * http://deeplearning.net/tutorial/dA.html
+    * http://scikit-learn.org/stable/modules/svm.html
 
 """
 from __future__ import print_function, division
