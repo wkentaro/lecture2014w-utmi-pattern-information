@@ -4,12 +4,14 @@ utmi-pattern-information
 | Assignments of class in UTokyo "Pattern Information".
 | http://www.mi.t.u-tokyo.ac.jp/harada/lectures/pattern/patternreport20150116.pdf
 
+Report
+======
 * `View Report <https://github.com/wkentaro/utmi-pattern-information/blob/master/report/pattern_report2014.pdf>`_
 * `Download Report <https://github.com/wkentaro/utmi-pattern-information/raw/master/report/pattern_report2014.pdf>`_
 
 
 Summary
-+++++++
+=======
 
 * Assignment1: Windrow-Hoff Algorithm to get decisive surface.
 * Assignment2: Use pseudo-inverse to map data to label.
@@ -21,7 +23,7 @@ Summary
 
 
 Codes
-+++++
+=====
 
 Execute below to get output in :code:`output/` dir.
 
