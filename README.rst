@@ -1,8 +1,12 @@
-pattern-information
-===================
-- Assignments of class in UTokyo "Pattern Information".  
-- http://www.mi.t.u-tokyo.ac.jp/harada/lectures/pattern/patternreport20150116.pdf
- 
+========================
+utmi-pattern-information
+========================
+| Assignments of class in UTokyo "Pattern Information".
+| http://www.mi.t.u-tokyo.ac.jp/harada/lectures/pattern/patternreport20150116.pdf
+
+* `View Report <https://github.com/wkentaro/utmi-pattern-information/blob/master/report/pattern_report2014.pdf>`_
+* `Download Report <https://github.com/wkentaro/utmi-pattern-information/raw/master/report/pattern_report2014.pdf>`_
+
 
 Summary
 +++++++
